@@ -1,0 +1,58 @@
+.code-snippets {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.snippets-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(93, 82, 236, 0.06);
+}
+
+.snippets-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+}
+
+.snippet-tab {
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.snippet-tab:hover {
+  color: var(--text-secondary);
+  background: rgba(93, 82, 236, 0.06);
+}
+.snippet-tab.active {
+  color: var(--color-turquoise);
+  border-bottom-color: var(--color-turquoise);
+  background: rgba(0, 187, 195, 0.06);
+}
+
+.snippet-code-container {
+  overflow: auto;
+  max-height: 400px;
+}
+
+.snippet-code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  padding: 20px;
+  margin: 0;
+  color: var(--text-primary);
+  white-space: pre;
+  tab-size: 2;
+}

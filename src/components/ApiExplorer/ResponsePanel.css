@@ -1,0 +1,111 @@
+.response-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.response-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(0, 187, 195, 0.04);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.response-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.response-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.status-success {
+  color: var(--color-light-green);
+  background: rgba(212, 236, 142, 0.12);
+}
+
+.status-error {
+  color: var(--color-light-orange);
+  background: rgba(255, 163, 139, 0.12);
+}
+
+.response-timing {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.response-count {
+  font-size: 0.78rem;
+  color: var(--color-turquoise);
+  font-weight: 500;
+}
+
+.response-headers-section {
+  border-bottom: 1px solid rgba(93, 82, 236, 0.1);
+}
+
+.response-headers-toggle {
+  display: block;
+  padding: 10px 20px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+.response-headers-toggle:hover {
+  color: var(--text-secondary);
+}
+
+.response-headers-list {
+  padding: 0 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.response-header-row {
+  display: flex;
+  gap: 12px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  padding: 2px 0;
+}
+
+.header-key {
+  color: var(--color-lavender);
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 180px;
+}
+
+.header-value {
+  color: var(--text-muted);
+  word-break: break-all;
+}
+
+.response-body {
+  padding: 0;
+}
+
+.response-body-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  padding: 16px 20px;
+  margin: 0;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+}

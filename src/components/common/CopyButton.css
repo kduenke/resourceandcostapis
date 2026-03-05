@@ -1,0 +1,25 @@
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border-color: var(--color-bright-indigo);
+}
+
+.copy-btn-copied {
+  color: var(--color-turquoise) !important;
+  border-color: var(--color-turquoise) !important;
+  background: rgba(0, 187, 195, 0.1) !important;
+}

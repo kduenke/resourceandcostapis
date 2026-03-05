@@ -1,0 +1,153 @@
+.api-explorer {
+  max-width: 1400px;
+}
+
+.api-explorer-header {
+  margin-bottom: 28px;
+}
+
+.api-header-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.api-name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.api-public-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-light-green);
+  background: rgba(212, 236, 142, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(212, 236, 142, 0.2);
+}
+
+.api-description {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin: 0 0 12px;
+  max-width: 800px;
+  line-height: 1.5;
+}
+
+.api-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.api-endpoint {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: var(--color-turquoise);
+  background: var(--bg-code);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  word-break: break-all;
+}
+
+.api-docs-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-lavender);
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+.api-docs-link:hover {
+  color: var(--color-turquoise);
+}
+
+.api-explorer-body {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.api-explorer-left {
+  position: sticky;
+  top: calc(var(--header-height) + 32px);
+}
+
+.api-explorer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.api-results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.api-error-panel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(255, 163, 139, 0.08);
+  border: 1px solid rgba(255, 163, 139, 0.2);
+  border-radius: 12px;
+}
+
+.error-icon {
+  font-size: 1.2rem;
+}
+
+.error-text {
+  font-size: 0.9rem;
+  color: var(--color-light-orange);
+}
+
+.api-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 40px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-color);
+  border-radius: 16px;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: var(--color-bright-indigo);
+  opacity: 0.3;
+  margin-bottom: 16px;
+}
+
+.api-empty-state h3 {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.api-empty-state p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1000px) {
+  .api-explorer-body {
+    grid-template-columns: 1fr;
+  }
+  .api-explorer-left {
+    position: static;
+  }
+}

@@ -1,0 +1,111 @@
+.request-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.request-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(26, 0, 226, 0.06);
+}
+
+.panel-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-icon {
+  font-size: 1rem;
+}
+
+.request-url-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(0, 0, 50, 0.5);
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+}
+
+.request-url {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  color: var(--color-turquoise);
+  word-break: break-all;
+}
+
+.request-section {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(93, 82, 236, 0.1);
+}
+.request-section:last-child {
+  border-bottom: none;
+}
+
+.request-section-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.request-params-table {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.request-param-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.request-param-row:hover {
+  background: rgba(93, 82, 236, 0.08);
+}
+
+.param-key {
+  color: var(--color-lavender);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.param-sep {
+  color: var(--text-muted);
+}
+
+.param-value {
+  color: var(--color-light-green);
+  word-break: break-all;
+}
+
+.request-body-code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  background: var(--bg-code);
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 1.6;
+  margin: 0;
+}

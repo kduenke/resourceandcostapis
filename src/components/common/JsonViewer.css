@@ -1,0 +1,79 @@
+.json-viewer {
+  background: var(--bg-code);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  overflow: auto;
+  max-height: 500px;
+}
+
+.json-pre {
+  margin: 0;
+  padding: 16px 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.json-line {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 16px;
+  min-height: 1.6em;
+}
+.json-line:hover {
+  background: rgba(93, 82, 236, 0.08);
+}
+
+.json-line-number {
+  flex: 0 0 40px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  text-align: right;
+  padding-right: 12px;
+  user-select: none;
+  opacity: 0.5;
+}
+
+.json-collapse-toggle {
+  flex: 0 0 18px;
+  font-size: 0.6rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding-top: 2px;
+  transition: color 0.2s;
+  user-select: none;
+}
+.json-collapse-toggle:hover {
+  color: var(--color-turquoise);
+}
+
+.json-collapse-spacer {
+  flex: 0 0 18px;
+}
+
+.json-collapsed-indicator {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.75rem;
+}
+
+.json-key {
+  color: var(--color-lavender);
+}
+
+.json-string {
+  color: var(--color-light-green);
+}
+
+.json-number {
+  color: var(--color-light-orange);
+}
+
+.json-boolean {
+  color: var(--color-turquoise);
+}
+
+.json-null {
+  color: var(--text-muted);
+  font-style: italic;
+}

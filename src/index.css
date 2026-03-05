@@ -1,0 +1,180 @@
+:root {
+  /* Primary */
+  --color-electric-blue: #1A00E2;
+  --color-energy-blue: #0000B3;
+
+  /* Secondary */
+  --color-deep-blue: #000085;
+  --color-navy-blue: #0D0061;
+  --color-pure-white: #FFFFFF;
+  --color-light-gray-2: #FAFAFA;
+  --color-light-gray: #D9D9D6;
+
+  /* Tertiary */
+  --color-turquoise: #00BBC3;
+  --color-bright-indigo: #5D52EC;
+  --color-blue: #0078D4;
+  --color-lavender: #AAC0F6;
+  --color-mint: #CFF3E8;
+  --color-fuschia: #D12ACA;
+  --color-sky-blue: #00FFFF;
+  --color-plum: #590055;
+
+  /* Accents */
+  --color-light-green: #D4EC8E;
+  --color-light-yellow: #FFE399;
+  --color-light-orange: #FFA38B;
+  --color-light-magenta: #D59ED7;
+
+  /* Semantic */
+  --bg-primary: #060028;
+  --bg-secondary: #0D0061;
+  --bg-card: rgba(13, 0, 97, 0.5);
+  --bg-card-hover: rgba(26, 0, 226, 0.15);
+  --bg-input: rgba(0, 0, 133, 0.4);
+  --bg-code: rgba(0, 0, 50, 0.7);
+  --text-primary: #FFFFFF;
+  --text-secondary: #AAC0F6;
+  --text-muted: rgba(170, 192, 246, 0.6);
+  --border-color: rgba(93, 82, 236, 0.3);
+  --border-glow: rgba(0, 187, 195, 0.4);
+  --glow-primary: rgba(26, 0, 226, 0.5);
+  --glow-turquoise: rgba(0, 187, 195, 0.3);
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --header-height: 64px;
+
+  /* Fonts */
+  font-family: 'Manrope', sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 90%, rgba(26, 0, 226, 0.15), transparent),
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(0, 187, 195, 0.08), transparent),
+    var(--bg-primary);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+code, pre, .mono {
+  font-family: 'Fira Code', monospace;
+}
+
+a {
+  color: var(--color-turquoise);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--color-sky-blue);
+}
+
+button {
+  font-family: 'Manrope', sans-serif;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input, select, textarea {
+  font-family: 'Manrope', sans-serif;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-turquoise);
+  box-shadow: 0 0 0 3px var(--glow-turquoise);
+}
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23AAC0F6' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(93, 82, 236, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(93, 82, 236, 0.5);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+

@@ -1,0 +1,96 @@
+.param-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.param-form-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(255, 227, 153, 0.04);
+}
+
+.param-fields {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.param-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.param-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.param-required {
+  color: var(--color-light-orange);
+  font-size: 1rem;
+}
+
+.param-description {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.param-input {
+  width: 100%;
+}
+
+.param-textarea {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.param-form-actions {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.param-submit-btn {
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, var(--color-electric-blue), var(--color-bright-indigo));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px var(--glow-primary);
+  transition: all 0.2s;
+}
+.param-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px var(--glow-primary);
+}
+.param-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
