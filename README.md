@@ -50,7 +50,7 @@ npm install
 1. Go to the [Azure Portal](https://portal.azure.com) → **Microsoft Entra ID** → **App registrations** → **New registration**
 2. Set the following:
    - **Name**: `Azure API Explorer` (or whatever you like)
-   - **Supported account types**: "Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant)"
+   - **Supported account types**: "Single tenant only - Default Directory"
    - **Redirect URI**: Select **Single-page application (SPA)** and enter `http://localhost:5173`
 3. Click **Register**
 4. On the app's **Overview** page, copy the **Application (client) ID** and **Directory (tenant) ID**
@@ -60,12 +60,11 @@ npm install
 5. Go to **API permissions** → **Add a permission** → **Azure Service Management**
 6. Select **Delegated permissions** → check `user_impersonation`
 7. Click **Add permissions**
-8. (Optional) Click **Grant admin consent** if you have admin access
 
 #### Configure Authentication
 
 9. Go to **Authentication** → Under **Single-page application**, confirm `http://localhost:5173` is listed
-10. Under **Implicit grant and hybrid flows**, leave both checkboxes **unchecked** (MSAL.js v5 uses auth code flow with PKCE)
+10. Click the **Settings** tab -> Under **Implicit grant and hybrid flows**, leave both checkboxes **unchecked** (MSAL.js v5 uses auth code flow with PKCE)
 11. Click **Save**
 
 ### 3. Configure Environment Variables
@@ -79,8 +78,6 @@ Edit `.env` and fill in your values:
 VITE_AZURE_CLIENT_ID=your-application-client-id
 VITE_AZURE_TENANT_ID=your-tenant-id
 ```
-
-> **Tip**: Set `VITE_AZURE_TENANT_ID=common` to allow any Microsoft account to sign in (multi-tenant).
 
 ### 4. Run the Dev Server
 
