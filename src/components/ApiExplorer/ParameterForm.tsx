@@ -17,9 +17,11 @@ interface ParameterFormProps {
   onSubmit: () => void;
   loading: boolean;
   submitLabel?: string;
+  disableSubmit?: boolean;
+  disableMessage?: string;
 }
 
-export function ParameterForm({ fields, onChange, onSubmit, loading, submitLabel = 'Send Request' }: ParameterFormProps) {
+export function ParameterForm({ fields, onChange, onSubmit, loading, submitLabel = 'Send Request', disableSubmit, disableMessage }: ParameterFormProps) {
   const canSubmit = fields.filter((f) => f.required).every((f) => f.value.trim());
 
   return (
@@ -73,19 +75,23 @@ export function ParameterForm({ fields, onChange, onSubmit, loading, submitLabel
       </div>
 
       <div className="param-form-actions">
-        <button
-          className="param-submit-btn"
-          onClick={onSubmit}
-          disabled={!canSubmit || loading}
-        >
-          {loading ? (
-            <>
-              <span className="btn-spinner" /> Calling API...
-            </>
-          ) : (
-            <>🚀 {submitLabel}</>
-          )}
-        </button>
+        {disableSubmit && disableMessage ? (
+          <div className="api-auth-notice">{disableMessage}</div>
+        ) : (
+          <button
+            className="param-submit-btn"
+            onClick={onSubmit}
+            disabled={!canSubmit || loading}
+          >
+            {loading ? (
+              <>
+                <span className="btn-spinner" /> Calling API...
+              </>
+            ) : (
+              <>🚀 {submitLabel}</>
+            )}
+          </button>
+        )}
       </div>
     </div>
   );

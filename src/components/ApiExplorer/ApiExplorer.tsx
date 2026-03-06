@@ -83,12 +83,9 @@ export function ApiExplorer({ apiDef, fields, onFieldChange, onSubmit, apiCall, 
             onChange={onFieldChange}
             onSubmit={onSubmit}
             loading={apiCall?.loading || false}
+            disableSubmit={!isAuthenticated && apiDef.requiresAuth}
+            disableMessage="🔐 Sign in with Microsoft to send live requests for this API."
           />
-          {!isAuthenticated && apiDef.requiresAuth && (
-            <div className="api-auth-notice">
-              🔐 Sign in with Microsoft to send live requests for this API.
-            </div>
-          )}
         </div>
 
         <div className="api-explorer-right">
