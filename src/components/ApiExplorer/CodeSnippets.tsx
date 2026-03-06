@@ -6,14 +6,15 @@ import './CodeSnippets.css';
 
 interface CodeSnippetsProps {
   request: ApiRequestInfo;
+  apiId?: string;
 }
 
-const languages: SnippetLanguage[] = ['curl', 'python', 'powershell', 'csharp', 'javascript', 'go'];
+const languages: SnippetLanguage[] = ['curl', 'python', 'powershell', 'csharp', 'javascript', 'go', 'java'];
 
-export function CodeSnippets({ request }: CodeSnippetsProps) {
+export function CodeSnippets({ request, apiId }: CodeSnippetsProps) {
   const [activeLang, setActiveLang] = useState<SnippetLanguage>('curl');
 
-  const code = snippetGenerators[activeLang](request);
+  const code = snippetGenerators[activeLang](request, apiId);
 
   return (
     <div className="code-snippets">

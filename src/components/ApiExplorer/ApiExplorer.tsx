@@ -64,7 +64,7 @@ export function ApiExplorer({ apiDef, fields, onFieldChange, onSubmit, apiCall, 
                 </div>
               )}
 
-              <CodeSnippets request={apiCall.request} />
+              <CodeSnippets request={apiCall.request} apiId={apiDef.id} />
 
               {children}
             </div>
