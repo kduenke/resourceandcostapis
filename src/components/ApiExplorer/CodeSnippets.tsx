@@ -8,7 +8,7 @@ interface CodeSnippetsProps {
   request: ApiRequestInfo;
 }
 
-const languages: SnippetLanguage[] = ['curl', 'python', 'powershell', 'csharp', 'javascript'];
+const languages: SnippetLanguage[] = ['curl', 'python', 'powershell', 'csharp', 'javascript', 'go'];
 
 export function CodeSnippets({ request }: CodeSnippetsProps) {
   const [activeLang, setActiveLang] = useState<SnippetLanguage>('curl');
