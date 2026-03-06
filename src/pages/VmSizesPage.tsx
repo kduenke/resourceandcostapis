@@ -13,7 +13,7 @@ export function VmSizesPage() {
   const { apiCall, execute } = useAzureApi();
   const [subscriptions, setSubscriptions] = useState<AzureSubscription[]>([]);
   const [subscriptionId, setSubscriptionId] = useState('');
-  const [location, setLocation] = useState('');
+  const [filter, setFilter] = useState("location eq 'eastus'");
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -38,24 +38,24 @@ export function VmSizesPage() {
       value: subscriptionId,
     },
     {
-      name: 'location',
-      label: 'Location',
-      description: 'Azure region name (e.g., eastus, westeurope, westus2). Visit the Locations page to discover available regions.',
+      name: '$filter',
+      label: 'Filter',
+      description: "OData filter to narrow results by location (e.g., location eq 'eastus'). The legacy /vmSizes endpoint is deprecated — this uses Resource SKUs with a filter instead.",
       required: true,
       type: 'text',
-      placeholder: 'eastus',
-      value: location,
+      placeholder: "location eq 'eastus'",
+      value: filter,
     },
   ];
 
   const handleFieldChange = useCallback((name: string, value: string) => {
     if (name === 'subscriptionId') setSubscriptionId(value);
-    if (name === 'location') setLocation(value);
+    if (name === '$filter') setFilter(value);
   }, []);
 
   const handleSubmit = useCallback(async () => {
-    await execute(apiDef, { subscriptionId, location });
-  }, [execute, subscriptionId, location]);
+    await execute(apiDef, { subscriptionId }, { '$filter': filter });
+  }, [execute, subscriptionId, filter]);
 
   if (!isAuthenticated) {
     return (
