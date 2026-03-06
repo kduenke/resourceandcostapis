@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import { useIsAuthenticated } from '@azure/msal-react';
 import { ApiExplorer } from '../components/ApiExplorer/ApiExplorer';
 import { getApiById } from '../services/apiCatalog';
 import { useAzureApi } from '../hooks/useAzureApi';
@@ -9,7 +8,6 @@ import type { AzureSubscription } from '../types/azure';
 const apiDef = getApiById('subscriptions')!;
 
 export function SubscriptionsPage() {
-  const isAuthenticated = useIsAuthenticated();
   const { apiCall, execute } = useAzureApi();
   const [fields] = useState<ParameterField[]>([]);
 
@@ -23,18 +21,6 @@ export function SubscriptionsPage() {
       }
     }
   }, [execute]);
-
-  if (!isAuthenticated) {
-    return (
-      <div className="api-explorer animate-in">
-        <div className="api-empty-state">
-          <div className="empty-icon">🔐</div>
-          <h3>Authentication Required</h3>
-          <p>Sign in with Microsoft to access this API.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <ApiExplorer

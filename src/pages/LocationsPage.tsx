@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from 'react';
-import { useIsAuthenticated } from '@azure/msal-react';
 import { ApiExplorer } from '../components/ApiExplorer/ApiExplorer';
 import { getApiById } from '../services/apiCatalog';
 import { useAzureApi } from '../hooks/useAzureApi';
@@ -9,7 +8,6 @@ import type { AzureSubscription } from '../types/azure';
 const apiDef = getApiById('locations')!;
 
 export function LocationsPage() {
-  const isAuthenticated = useIsAuthenticated();
   const { apiCall, execute } = useAzureApi();
   const [subscriptions, setSubscriptions] = useState<AzureSubscription[]>([]);
   const [subscriptionId, setSubscriptionId] = useState('');
@@ -45,18 +43,6 @@ export function LocationsPage() {
   const handleSubmit = useCallback(async () => {
     await execute(apiDef, { subscriptionId });
   }, [execute, subscriptionId]);
-
-  if (!isAuthenticated) {
-    return (
-      <div className="api-explorer animate-in">
-        <div className="api-empty-state">
-          <div className="empty-icon">🔐</div>
-          <h3>Authentication Required</h3>
-          <p>Sign in with Microsoft to access this API.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <ApiExplorer

@@ -143,6 +143,31 @@
   line-height: 1.5;
 }
 
+.api-sample-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-turquoise);
+  background: rgba(95, 218, 210, 0.08);
+  border: 1px solid rgba(95, 218, 210, 0.2);
+  border-radius: 10px;
+}
+
+.api-auth-notice {
+  margin-top: 14px;
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-lavender);
+  background: rgba(179, 157, 219, 0.08);
+  border: 1px solid rgba(179, 157, 219, 0.18);
+  border-radius: 10px;
+  line-height: 1.5;
+}
+
 @media (max-width: 1000px) {
   .api-explorer-body {
     grid-template-columns: 1fr;

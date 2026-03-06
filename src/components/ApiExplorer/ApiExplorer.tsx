@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+import { useIsAuthenticated } from '@azure/msal-react';
 import { MethodBadge } from '../common/MethodBadge';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 import { ParameterForm } from './ParameterForm';
@@ -7,7 +9,36 @@ import { ResponsePanel } from './ResponsePanel';
 import { CodeSnippets } from './CodeSnippets';
 import type { ApiDefinition } from '../../services/apiCatalog';
 import type { CapturedApiCall } from '../../types/azure';
+import { mockResponses } from '../../services/mockData';
 import './ApiExplorer.css';
+
+function buildMockApiCall(apiDef: ApiDefinition): CapturedApiCall {
+  const baseUrl = apiDef.isExternalUrl
+    ? apiDef.pathTemplate
+    : `https://management.azure.com${apiDef.pathTemplate}`;
+
+  return {
+    request: {
+      method: apiDef.method,
+      url: `${baseUrl}?api-version=${apiDef.apiVersion}`,
+      headers: {
+        'content-type': 'application/json',
+        ...(apiDef.requiresAuth ? { authorization: 'Bearer ••••••' } : {}),
+      },
+      queryParams: { 'api-version': apiDef.apiVersion },
+      timestamp: Date.now(),
+    },
+    response: {
+      status: 200,
+      statusText: 'OK (Sample)',
+      headers: { 'content-type': 'application/json' },
+      body: mockResponses[apiDef.id] ?? {},
+      duration: 0,
+    },
+    loading: false,
+    error: null,
+  };
+}
 
 interface ApiExplorerProps {
   apiDef: ApiDefinition;
@@ -19,6 +50,13 @@ interface ApiExplorerProps {
 }
 
 export function ApiExplorer({ apiDef, fields, onFieldChange, onSubmit, apiCall, children }: ApiExplorerProps) {
+  const isAuthenticated = useIsAuthenticated();
+  const mockCall = useMemo(() => buildMockApiCall(apiDef), [apiDef]);
+
+  // Show live data when a real call has been made; otherwise show mock preview
+  const displayCall = apiCall ?? mockCall;
+  const isShowingMock = !apiCall;
+
   return (
     <div className="api-explorer animate-in">
       <div className="api-explorer-header">
@@ -46,6 +84,11 @@ export function ApiExplorer({ apiDef, fields, onFieldChange, onSubmit, apiCall, 
             onSubmit={onSubmit}
             loading={apiCall?.loading || false}
           />
+          {!isAuthenticated && apiDef.requiresAuth && (
+            <div className="api-auth-notice">
+              🔐 Sign in with Microsoft to send live requests for this API.
+            </div>
+          )}
         </div>
 
         <div className="api-explorer-right">
@@ -70,11 +113,17 @@ export function ApiExplorer({ apiDef, fields, onFieldChange, onSubmit, apiCall, 
             </div>
           )}
 
-          {!apiCall && (
-            <div className="api-empty-state">
-              <div className="empty-icon">⬡</div>
-              <h3>Ready to Explore</h3>
-              <p>Fill in the parameters and click <strong>Send Request</strong> to call this Azure API. You'll see the exact HTTP request, response, and code snippets.</p>
+          {isShowingMock && !displayCall.loading && displayCall.request && (
+            <div className="api-results animate-in">
+              <div className="api-sample-banner">
+                📋 Sample Data — Sign in with Microsoft to make live API calls
+              </div>
+
+              <RequestPanel request={displayCall.request} />
+
+              {displayCall.response && <ResponsePanel response={displayCall.response} />}
+
+              <CodeSnippets request={displayCall.request} apiId={apiDef.id} />
             </div>
           )}
         </div>

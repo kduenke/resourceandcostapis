@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from 'react';
-import { useIsAuthenticated } from '@azure/msal-react';
 import { ApiExplorer } from '../components/ApiExplorer/ApiExplorer';
 import { getApiById } from '../services/apiCatalog';
 import { useAzureApi } from '../hooks/useAzureApi';
@@ -11,7 +10,6 @@ const apiDef = getApiById('cost-management')!;
 const defaultBody = JSON.stringify(apiDef.bodyTemplate, null, 2);
 
 export function CostManagementPage() {
-  const isAuthenticated = useIsAuthenticated();
   const { apiCall, execute } = useAzureApi();
   const [subscriptions, setSubscriptions] = useState<AzureSubscription[]>([]);
   const [subscriptionId, setSubscriptionId] = useState('');
@@ -65,18 +63,6 @@ export function CostManagementPage() {
     }
     await execute(apiDef, { subscriptionId }, {}, body);
   }, [execute, subscriptionId, requestBody]);
-
-  if (!isAuthenticated) {
-    return (
-      <div className="api-explorer animate-in">
-        <div className="api-empty-state">
-          <div className="empty-icon">🔐</div>
-          <h3>Authentication Required</h3>
-          <p>Sign in with Microsoft to access this API.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <ApiExplorer
