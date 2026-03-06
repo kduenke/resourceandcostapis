@@ -25,6 +25,18 @@ export async function callAzureApi(options: AzureApiCallOptions): Promise<Captur
 
   const baseUrl = isExternalUrl ? path : `${ARM_BASE}${path}`;
 
+  // Rewrite external URLs to use the Vite dev proxy to avoid CORS
+  const PROXY_REWRITES: Record<string, string> = {
+    'https://prices.azure.com': '',
+  };
+  let fetchUrl = baseUrl;
+  for (const [origin, replacement] of Object.entries(PROXY_REWRITES)) {
+    if (fetchUrl.startsWith(origin)) {
+      fetchUrl = fetchUrl.replace(origin, replacement);
+      break;
+    }
+  }
+
   const allQueryParams = { ...queryParams, 'api-version': apiVersion };
 
   const headers: Record<string, string> = {};
@@ -55,7 +67,7 @@ export async function callAzureApi(options: AzureApiCallOptions): Promise<Captur
     const qs = Object.entries(allQueryParams)
       .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
       .join('&');
-    const fullUrl = `${baseUrl}?${qs}`;
+    const fullUrl = `${fetchUrl}?${qs}`;
 
     const startTime = performance.now();
     const fetchOptions: RequestInit = {

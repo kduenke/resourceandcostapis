@@ -13,8 +13,9 @@ import { mockResponses } from '../../services/mockData';
 import './ApiExplorer.css';
 
 function buildMockApiCall(apiDef: ApiDefinition): CapturedApiCall {
-  const baseUrl = apiDef.displayUrl
-    || (apiDef.isExternalUrl ? apiDef.pathTemplate : `https://management.azure.com${apiDef.pathTemplate}`);
+  const baseUrl = apiDef.isExternalUrl
+    ? apiDef.pathTemplate
+    : `https://management.azure.com${apiDef.pathTemplate}`;
 
   return {
     request: {
@@ -67,7 +68,7 @@ export function ApiExplorer({ apiDef, fields, onFieldChange, onSubmit, apiCall, 
         <p className="api-description">{apiDef.description}</p>
         <div className="api-meta">
           <code className="api-endpoint">
-            {apiDef.displayUrl || (apiDef.isExternalUrl ? apiDef.pathTemplate : `https://management.azure.com${apiDef.pathTemplate}`)}
+            {apiDef.isExternalUrl ? apiDef.pathTemplate : `https://management.azure.com${apiDef.pathTemplate}`}
           </code>
           <a href={apiDef.docsUrl} target="_blank" rel="noopener noreferrer" className="api-docs-link">
             📖 View Docs ↗
