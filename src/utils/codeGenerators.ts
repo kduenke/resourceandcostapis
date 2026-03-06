@@ -197,7 +197,64 @@ export function generateJavaScript(req: ApiRequestInfo): string {
   return lines.join('\n');
 }
 
-export type SnippetLanguage = 'curl' | 'python' | 'powershell' | 'csharp' | 'javascript';
+export function generateGo(req: ApiRequestInfo): string {
+  const lines: string[] = [];
+
+  let fullUrl = req.url;
+  const params = Object.entries(req.queryParams);
+  if (params.length > 0) {
+    const qs = params.map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
+    fullUrl += (fullUrl.includes('?') ? '&' : '?') + qs;
+  }
+
+  lines.push('package main');
+  lines.push('');
+  lines.push('import (');
+  lines.push('\t"fmt"');
+  lines.push('\t"io"');
+  lines.push('\t"net/http"');
+  if (req.body) {
+    lines.push('\t"strings"');
+  }
+  lines.push(')');
+  lines.push('');
+  lines.push('func main() {');
+
+  if (req.body) {
+    lines.push(`\tbody := strings.NewReader(\`${JSON.stringify(req.body, null, 2)}\`)`);
+    lines.push(`\treq, err := http.NewRequest("${req.method}", "${fullUrl}", body)`);
+  } else {
+    lines.push(`\treq, err := http.NewRequest("${req.method}", "${fullUrl}", nil)`);
+  }
+  lines.push('\tif err != nil {');
+  lines.push('\t\tpanic(err)');
+  lines.push('\t}');
+  lines.push('');
+
+  for (const [key, value] of Object.entries(req.headers)) {
+    if (key.toLowerCase() === 'authorization') {
+      lines.push('\treq.Header.Set("Authorization", "Bearer <your-access-token>")');
+    } else {
+      lines.push(`\treq.Header.Set("${key}", "${value}")`);
+    }
+  }
+  lines.push('');
+
+  lines.push('\tresp, err := http.DefaultClient.Do(req)');
+  lines.push('\tif err != nil {');
+  lines.push('\t\tpanic(err)');
+  lines.push('\t}');
+  lines.push('\tdefer resp.Body.Close()');
+  lines.push('');
+  lines.push('\tdata, _ := io.ReadAll(resp.Body)');
+  lines.push('\tfmt.Printf("Status: %s\\n", resp.Status)');
+  lines.push('\tfmt.Println(string(data))');
+  lines.push('}');
+
+  return lines.join('\n');
+}
+
+export type SnippetLanguage = 'curl' | 'python' | 'powershell' | 'csharp' | 'javascript' | 'go';
 
 export const snippetGenerators: Record<SnippetLanguage, (req: ApiRequestInfo) => string> = {
   curl: generateCurl,
@@ -205,6 +262,7 @@ export const snippetGenerators: Record<SnippetLanguage, (req: ApiRequestInfo) =>
   powershell: generatePowerShell,
   csharp: generateCSharp,
   javascript: generateJavaScript,
+  go: generateGo,
 };
 
 export const snippetLabels: Record<SnippetLanguage, string> = {
@@ -213,4 +271,5 @@ export const snippetLabels: Record<SnippetLanguage, string> = {
   powershell: 'PowerShell',
   csharp: 'C#',
   javascript: 'JavaScript',
+  go: 'Go',
 };
