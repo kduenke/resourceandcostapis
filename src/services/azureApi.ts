@@ -27,9 +27,10 @@ export async function callAzureApi(options: AzureApiCallOptions): Promise<Captur
 
   const allQueryParams = { ...queryParams, 'api-version': apiVersion };
 
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-  };
+  const headers: Record<string, string> = {};
+  if (body) {
+    headers['Content-Type'] = 'application/json';
+  }
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
