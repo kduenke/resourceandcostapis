@@ -18,6 +18,7 @@ export interface ApiDefinition {
   category: 'core' | 'pricing';
   requiresAuth: boolean;
   isExternalUrl: boolean;
+  displayUrl?: string;
   parameters: ApiParameter[];
   docsUrl: string;
   bodyTemplate?: unknown;
@@ -146,11 +147,12 @@ export const apiCatalog: ApiDefinition[] = [
     shortName: 'Retail Prices',
     description: 'Query Azure retail (list) prices. This is a PUBLIC API — no authentication required! Supports OData filtering by service, region, SKU, and more.',
     method: 'GET',
-    pathTemplate: 'https://prices.azure.com/api/retail/prices',
+    pathTemplate: '/api/retail/prices',
     apiVersion: '2023-01-01-preview',
     category: 'pricing',
     requiresAuth: false,
-    isExternalUrl: true,
+    isExternalUrl: false,
+    displayUrl: 'https://prices.azure.com/api/retail/prices',
     parameters: [
       {
         name: '$filter',

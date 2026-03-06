@@ -40,6 +40,10 @@ export function useAzureApi() {
         ? apiDef.pathTemplate
         : buildArmPath(apiDef.pathTemplate, pathParams);
 
+      // Display URL uses the real external URL; fetch goes through proxy if needed
+      const displayUrl = apiDef.displayUrl
+        || (apiDef.isExternalUrl ? path : `https://management.azure.com${path}`);
+
       const queryParams: Record<string, string> = {};
       apiDef.parameters
         .filter((p) => p.type === 'query')
@@ -54,7 +58,7 @@ export function useAzureApi() {
       setApiCall({
         request: {
           method: apiDef.method,
-          url: apiDef.isExternalUrl ? path : `https://management.azure.com${path}`,
+          url: displayUrl,
           headers: {
             'Content-Type': 'application/json',
             ...(token ? { Authorization: `Bearer ${token}` } : {}),
