@@ -12,16 +12,23 @@ import { msalConfig } from './auth/authConfig';
 import './index.css';
 import App from './App';
 
-// MSAL v5 popup flow: when the popup redirects back to this page with
-// #code=...&state=..., we must broadcast the auth response to the parent
-// window via BroadcastChannel and close the popup — without rendering React.
-if (window.location.hash.includes('code=')) {
+// MSAL v5 popup flow: detect auth responses in both hash AND query string.
+// Covers success (code=) and error (error=) responses in all URL formats.
+// We gate on this check to avoid calling broadcastResponseToMainFrame() on
+// normal page loads — that function strips URL hash/query on parse failure.
+const _hash = window.location.hash;
+const _search = window.location.search;
+const hasAuthResponse =
+  _hash.includes('code=') || _hash.includes('error=') ||
+  _search.includes('code=') || _search.includes('error=');
+
+if (hasAuthResponse) {
   broadcastResponseToMainFrame()
     .then(() => {
-      window.close();
+      // Auth response processed — popup closes itself via BroadcastChannel.
     })
     .catch(() => {
-      // Not a popup redirect — fall through to normal app rendering
+      // Parse failed despite auth-like params — render normally.
       renderApp();
     });
 } else {
