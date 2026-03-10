@@ -4,6 +4,8 @@ import './Sidebar.css';
 
 const coreApis = apiCatalog.filter((a) => a.category === 'core');
 const pricingApis = apiCatalog.filter((a) => a.category === 'pricing');
+const quotaApis = apiCatalog.filter((a) => a.category === 'quota');
+// const supportApis = apiCatalog.filter((a) => a.category === 'support'); // temporarily hidden
 
 const apiIcons: Record<string, string> = {
   subscriptions: '🔑',
@@ -13,6 +15,12 @@ const apiIcons: Record<string, string> = {
   'compute-resources': '🖥️',
   'retail-pricing': '💰',
   'cost-management': '📊',
+  'quota-list': '📋',
+  'quota-update': '📝',
+  'quota-request-status': '🔍',
+  'provider-usage': '📈',
+  'support-tickets-list': '🎫',
+  'support-tickets-create': '✏️',
 };
 
 export function Sidebar() {
@@ -64,6 +72,48 @@ export function Sidebar() {
             </NavLink>
           ))}
         </div>
+
+        <div className="sidebar-section">
+          <h3 className="sidebar-section-title">
+            <span className="section-line" />
+            Quota Management
+          </h3>
+          {quotaApis.map((api) => (
+            <NavLink
+              key={api.id}
+              to={`/api/${api.id}`}
+              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+            >
+              <span className="sidebar-icon">{apiIcons[api.id]}</span>
+              <div className="sidebar-link-content">
+                <span className="sidebar-link-name">{api.shortName}</span>
+                <span className="sidebar-link-method">{api.method}</span>
+              </div>
+            </NavLink>
+          ))}
+        </div>
+
+        {/* Support Tickets section temporarily hidden
+        <div className="sidebar-section">
+          <h3 className="sidebar-section-title">
+            <span className="section-line" />
+            Support Tickets
+          </h3>
+          {supportApis.map((api) => (
+            <NavLink
+              key={api.id}
+              to={`/api/${api.id}`}
+              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+            >
+              <span className="sidebar-icon">{apiIcons[api.id]}</span>
+              <div className="sidebar-link-content">
+                <span className="sidebar-link-name">{api.shortName}</span>
+                <span className="sidebar-link-method">{api.method}</span>
+              </div>
+            </NavLink>
+          ))}
+        </div>
+        */}
       </nav>
 
       <div className="sidebar-footer">

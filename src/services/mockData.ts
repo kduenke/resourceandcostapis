@@ -384,6 +384,189 @@ export const mockCostManagementResponse: CostManagementResult = {
   },
 };
 
+// ─── 8. Quota List ──────────────────────────────────────────────────────────
+
+export const mockQuotaListResponse = {
+  value: [
+    {
+      id: '/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotas/standardDSv3Family',
+      name: 'standardDSv3Family',
+      type: 'Microsoft.Quota/quotas',
+      properties: {
+        limit: { limitObjectType: 'LimitValue', limitType: 'Independent', value: 100 },
+        name: { value: 'standardDSv3Family', localizedValue: 'Standard DSv3 Family vCPUs' },
+        unit: 'Count',
+        isQuotaApplicable: true,
+        properties: {},
+      },
+    },
+    {
+      id: '/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotas/standardDSv5Family',
+      name: 'standardDSv5Family',
+      type: 'Microsoft.Quota/quotas',
+      properties: {
+        limit: { limitObjectType: 'LimitValue', limitType: 'Independent', value: 200 },
+        name: { value: 'standardDSv5Family', localizedValue: 'Standard DSv5 Family vCPUs' },
+        unit: 'Count',
+        isQuotaApplicable: true,
+        properties: {},
+      },
+    },
+    {
+      id: '/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotas/totalRegionalvCPUs',
+      name: 'totalRegionalvCPUs',
+      type: 'Microsoft.Quota/quotas',
+      properties: {
+        limit: { limitObjectType: 'LimitValue', limitType: 'Independent', value: 350 },
+        name: { value: 'totalRegionalvCPUs', localizedValue: 'Total Regional vCPUs' },
+        unit: 'Count',
+        isQuotaApplicable: true,
+        properties: {},
+      },
+    },
+  ],
+};
+
+// ─── 9. Quota Update (Create or Update) ─────────────────────────────────────
+
+export const mockQuotaUpdateResponse = {
+  id: '/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotas/standardDSv3Family',
+  name: 'standardDSv3Family',
+  type: 'Microsoft.Quota/quotas',
+  properties: {
+    limit: { limitObjectType: 'LimitValue', limitType: 'Independent', value: 200 },
+    name: { value: 'standardDSv3Family', localizedValue: 'Standard DSv3 Family vCPUs' },
+    unit: 'Count',
+    isQuotaApplicable: true,
+    provisioningState: 'InProgress',
+  },
+};
+
+// ─── 10. Quota Request Status ────────────────────────────────────────────────
+
+export const mockQuotaRequestStatusResponse = {
+  id: '/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaRequests/aaaabbbb-cccc-dddd-eeee-ffffffffffff',
+  name: 'aaaabbbb-cccc-dddd-eeee-ffffffffffff',
+  type: 'Microsoft.Quota/quotaRequests',
+  properties: {
+    provisioningState: 'Succeeded',
+    message: 'Quota request completed successfully.',
+    requestSubmitTime: '2026-03-08T14:30:00Z',
+    value: [
+      {
+        limit: { limitObjectType: 'LimitValue', limitType: 'Independent', value: 200 },
+        name: { value: 'standardDSv3Family', localizedValue: 'Standard DSv3 Family vCPUs' },
+        unit: 'Count',
+        provisioningState: 'Succeeded',
+      },
+    ],
+  },
+};
+
+// ─── 11. Provider Usage ──────────────────────────────────────────────────────
+
+export const mockProviderUsageResponse = {
+  value: [
+    {
+      unit: 'Count',
+      currentValue: 24,
+      limit: 100,
+      name: { value: 'standardDSv3Family', localizedValue: 'Standard DSv3 Family vCPUs' },
+    },
+    {
+      unit: 'Count',
+      currentValue: 16,
+      limit: 200,
+      name: { value: 'standardDSv5Family', localizedValue: 'Standard DSv5 Family vCPUs' },
+    },
+    {
+      unit: 'Count',
+      currentValue: 40,
+      limit: 350,
+      name: { value: 'totalRegionalvCPUs', localizedValue: 'Total Regional vCPUs' },
+    },
+    {
+      unit: 'Count',
+      currentValue: 2,
+      limit: 10,
+      name: { value: 'availabilitySets', localizedValue: 'Availability Sets' },
+    },
+  ],
+};
+
+// ─── 12. Support Tickets List ────────────────────────────────────────────────
+
+export const mockSupportTicketsListResponse = {
+  value: [
+    {
+      id: '/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Support/supportTickets/quota_increase_vm_eastus',
+      name: 'quota_increase_vm_eastus',
+      type: 'Microsoft.Support/supportTickets',
+      properties: {
+        supportTicketId: 'REQ0012345678',
+        title: 'Quota increase request for Compute VM cores',
+        description: 'Request to increase vCPU quota for Standard DSv3 Family in East US.',
+        severity: 'moderate',
+        status: 'open',
+        createdDate: '2026-03-05T10:00:00Z',
+        modifiedDate: '2026-03-07T14:30:00Z',
+        serviceId: '/providers/Microsoft.Support/services/quota_service_guid',
+        serviceDisplayName: 'Service and subscription limits (quotas)',
+        contactDetails: {
+          firstName: 'Jane',
+          lastName: 'Doe',
+          primaryEmailAddress: 'jane.doe@contoso.com',
+        },
+      },
+    },
+    {
+      id: '/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Support/supportTickets/network_peering_issue',
+      name: 'network_peering_issue',
+      type: 'Microsoft.Support/supportTickets',
+      properties: {
+        supportTicketId: 'REQ0012345679',
+        title: 'VNet peering connectivity issue',
+        description: 'Unable to establish peering between VNets in different regions.',
+        severity: 'highestcriticalimpact',
+        status: 'closed',
+        createdDate: '2026-02-20T08:15:00Z',
+        modifiedDate: '2026-02-25T16:45:00Z',
+        serviceId: '/providers/Microsoft.Support/services/networking_guid',
+        serviceDisplayName: 'Virtual Network',
+        contactDetails: {
+          firstName: 'John',
+          lastName: 'Smith',
+          primaryEmailAddress: 'john.smith@contoso.com',
+        },
+      },
+    },
+  ],
+};
+
+// ─── 13. Support Tickets Create ──────────────────────────────────────────────
+
+export const mockSupportTicketsCreateResponse = {
+  id: '/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Support/supportTickets/quota_increase_vm_westus2',
+  name: 'quota_increase_vm_westus2',
+  type: 'Microsoft.Support/supportTickets',
+  properties: {
+    supportTicketId: 'REQ0012345680',
+    title: 'Quota increase request for Compute VM cores',
+    description: 'Request to increase vCPU quota for Standard DSv3 Family in West US 2 from 100 to 200.',
+    severity: 'moderate',
+    status: 'open',
+    createdDate: '2026-03-10T16:00:00Z',
+    modifiedDate: '2026-03-10T16:00:00Z',
+    serviceId: '/providers/Microsoft.Support/services/quota_service_guid',
+    serviceDisplayName: 'Service and subscription limits (quotas)',
+    contactDetails: {
+      firstName: 'Jane',
+      lastName: 'Doe',
+      primaryEmailAddress: 'jane.doe@contoso.com',
+    },
+  },
+};
+
 // ─── Combined lookup by API id ──────────────────────────────────────────────
 
 export const mockResponses: Record<string, unknown> = {
@@ -394,4 +577,10 @@ export const mockResponses: Record<string, unknown> = {
   'compute-resources': mockComputeResourcesResponse,
   'retail-pricing': mockRetailPricingResponse,
   'cost-management': mockCostManagementResponse,
+  'quota-list': mockQuotaListResponse,
+  'quota-update': mockQuotaUpdateResponse,
+  'quota-request-status': mockQuotaRequestStatusResponse,
+  'provider-usage': mockProviderUsageResponse,
+  'support-tickets-list': mockSupportTicketsListResponse,
+  'support-tickets-create': mockSupportTicketsCreateResponse,
 };

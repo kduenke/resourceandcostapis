@@ -6,6 +6,8 @@ import './HomePage.css';
 
 const coreApis = apiCatalog.filter((a) => a.category === 'core');
 const pricingApis = apiCatalog.filter((a) => a.category === 'pricing');
+const quotaApis = apiCatalog.filter((a) => a.category === 'quota');
+// const supportApis = apiCatalog.filter((a) => a.category === 'support'); // temporarily hidden
 
 const apiIcons: Record<string, string> = {
   subscriptions: '🔑',
@@ -15,6 +17,12 @@ const apiIcons: Record<string, string> = {
   'compute-resources': '🖥️',
   'retail-pricing': '💰',
   'cost-management': '📊',
+  'quota-list': '📋',
+  'quota-update': '📝',
+  'quota-request-status': '🔍',
+  'provider-usage': '📈',
+  'support-tickets-list': '🎫',
+  'support-tickets-create': '✏️',
 };
 
 export function HomePage() {
@@ -101,6 +109,56 @@ export function HomePage() {
           ))}
         </div>
       </section>
+
+      <section className="home-section">
+        <h2 className="section-heading">
+          <span className="heading-line" />
+          Quota Management APIs
+          <span className="heading-tag">Authenticated</span>
+        </h2>
+        <div className="api-cards-grid">
+          {quotaApis.map((api, i) => (
+            <Link key={api.id} to={`/api/${api.id}`} className={`api-card animate-in stagger-${i + 1}`}>
+              <div className="api-card-icon">{apiIcons[api.id]}</div>
+              <div className="api-card-content">
+                <div className="api-card-top">
+                  <h3 className="api-card-name">{api.shortName}</h3>
+                  <MethodBadge method={api.method} size="sm" />
+                </div>
+                <p className="api-card-desc">{api.description}</p>
+                <code className="api-card-path">{api.pathTemplate}</code>
+              </div>
+              <div className="api-card-arrow">→</div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Support Ticket section temporarily hidden
+      <section className="home-section">
+        <h2 className="section-heading">
+          <span className="heading-line" />
+          Support Ticket APIs
+          <span className="heading-tag">Authenticated</span>
+        </h2>
+        <div className="api-cards-grid">
+          {supportApis.map((api, i) => (
+            <Link key={api.id} to={`/api/${api.id}`} className={`api-card animate-in stagger-${i + 1}`}>
+              <div className="api-card-icon">{apiIcons[api.id]}</div>
+              <div className="api-card-content">
+                <div className="api-card-top">
+                  <h3 className="api-card-name">{api.shortName}</h3>
+                  <MethodBadge method={api.method} size="sm" />
+                </div>
+                <p className="api-card-desc">{api.description}</p>
+                <code className="api-card-path">{api.pathTemplate}</code>
+              </div>
+              <div className="api-card-arrow">→</div>
+            </Link>
+          ))}
+        </div>
+      </section>
+      */}
 
       <section className="home-section features-section">
         <h2 className="section-heading">
