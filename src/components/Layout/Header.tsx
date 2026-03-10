@@ -11,7 +11,7 @@ export function Header() {
   };
 
   const handleLogout = () => {
-    instance.logoutPopup({ mainWindowRedirectUri: '/' }).catch(console.error);
+    instance.logoutRedirect({ postLogoutRedirectUri: '/' }).catch(console.error);
   };
 
   const userName = accounts[0]?.name || accounts[0]?.username || '';
